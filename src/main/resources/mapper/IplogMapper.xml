@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.IplogMapper">
+    <insert id="addIplog">
+        INSERT INTO iplog (ip,state,username,logininfoid,userType,logintime)
+        VALUES(#{ip},#{state},#{username},#{logininfoid},#{userType},#{logintime})
+    </insert>
+
+
+    <select id="getIplog" resultType="com.zking.ssm.model.Iplog"></select>
+
+
+    <select id="getIplogByMaxDate" resultType="com.zking.ssm.model.Iplog">
+        SELECT * FROM iplog WHERE logintime = (
+	        SELECT MAX(logintime) FROM iplog
+        ) AND logininfoid = #{logininfoid}
+    </select>
+
+
+</mapper>

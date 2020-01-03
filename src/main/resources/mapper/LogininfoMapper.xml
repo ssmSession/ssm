@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.LogininfoMapper">
+
+    <insert id="userRegister">
+        insert into logininfo(username, password, phoneNumber, state, userType) values(#{username},#{password},#{phoneNumber},0,0)
+    </insert>
+
+
+    <update id="updateLoginInfoState">
+        UPDATE logininfo SET state = #{state} WHERE id = #{id}
+    </update>
+
+
+    <update id="updateLoginInfoUserType">
+        update logininfo set userType = #{userType} where id = #{id}
+    </update>
+
+
+    <select id="getUserByNameAndPwd" resultType="com.zking.ssm.model.Logininfo" parameterType="com.zking.ssm.model.Logininfo">
+        select * from logininfo where username=#{username} and password=#{password}
+    </select>
+
+
+    <select id="getLoginInfosByUserType" resultType="com.zking.ssm.model.Logininfo">
+        select  * from logininfo where userType = #{userType}
+    </select>
+
+</mapper>

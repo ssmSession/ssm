@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.admin.mapper.SsmModuleMapper">
+
+
+    <resultMap id="moduleMap" type="com.zking.ssm.model.SsmModule" >
+        <id column="id" property="id" javaType="java.lang.Integer"/>
+        <result column="pid" property="pid" javaType="java.lang.Integer"/>
+        <result column="text" property="text" javaType="java.lang.String"/>
+        <result column="icon"  property="icon" javaType="java.lang.String"/>
+        <result column="url" property="url" javaType="java.lang.String"/>
+        <result column="sort"  property="sort" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <!-- 查询所有的菜单栏 -->
+    <select id="getModules" resultMap="moduleMap">
+      select  *  from ssm_module where pid = #{pid}
+    </select>
+    <select id="getUserModules" resultMap="moduleMap">
+         select  *  from ssm_user_module where pid = #{pid}
+    </select>
+
+</mapper>

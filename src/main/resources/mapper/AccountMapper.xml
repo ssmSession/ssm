@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Account" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="tradePassword" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="usableAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="freezedAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="version" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="unReceiveInterest" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="unReceivePrincipal" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="unReturnAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="remainBorrowLimit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="borrowLimit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, tradePassword, usableAmount, freezedAmount, version, unReceiveInterest, unReceivePrincipal, 
+    unReturnAmount, remainBorrowLimit, borrowLimit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="selectAccountById" resultType="com.zking.ssm.model.Account">
+    select * from account where id = #{id};
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Account" >
+    insert into account (id, tradePassword, usableAmount, 
+      freezedAmount, version, unReceiveInterest, 
+      unReceivePrincipal, unReturnAmount, remainBorrowLimit, 
+      borrowLimit)
+    values (#{id,jdbcType=BIGINT}, #{tradepassword,jdbcType=VARCHAR}, #{usableamount,jdbcType=DECIMAL}, 
+      #{freezedamount,jdbcType=DECIMAL}, #{version,jdbcType=INTEGER}, #{unreceiveinterest,jdbcType=DECIMAL}, 
+      #{unreceiveprincipal,jdbcType=DECIMAL}, #{unreturnamount,jdbcType=DECIMAL}, #{remainborrowlimit,jdbcType=DECIMAL}, 
+      #{borrowlimit,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Account" >
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tradepassword != null" >
+        tradePassword,
+      </if>
+      <if test="usableamount != null" >
+        usableAmount,
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="unreceiveinterest != null" >
+        unReceiveInterest,
+      </if>
+      <if test="unreceiveprincipal != null" >
+        unReceivePrincipal,
+      </if>
+      <if test="unreturnamount != null" >
+        unReturnAmount,
+      </if>
+      <if test="remainborrowlimit != null" >
+        remainBorrowLimit,
+      </if>
+      <if test="borrowlimit != null" >
+        borrowLimit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tradepassword != null" >
+        #{tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usableamount != null" >
+        #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="unreceiveinterest != null" >
+        #{unreceiveinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="unreceiveprincipal != null" >
+        #{unreceiveprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="unreturnamount != null" >
+        #{unreturnamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainborrowlimit != null" >
+        #{remainborrowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowlimit != null" >
+        #{borrowlimit,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Account" >
+    update account
+    <set >
+      <if test="tradepassword != null" >
+        tradePassword = #{tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usableamount != null" >
+        usableAmount = #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="unreceiveinterest != null" >
+        unReceiveInterest = #{unreceiveinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="unreceiveprincipal != null" >
+        unReceivePrincipal = #{unreceiveprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="unreturnamount != null" >
+        unReturnAmount = #{unreturnamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainborrowlimit != null" >
+        remainBorrowLimit = #{remainborrowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowlimit != null" >
+        borrowLimit = #{borrowlimit,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Account" >
+    update account
+    set tradePassword = #{tradepassword,jdbcType=VARCHAR},
+      usableAmount = #{usableamount,jdbcType=DECIMAL},
+      freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      version = #{version,jdbcType=INTEGER},
+      unReceiveInterest = #{unreceiveinterest,jdbcType=DECIMAL},
+      unReceivePrincipal = #{unreceiveprincipal,jdbcType=DECIMAL},
+      unReturnAmount = #{unreturnamount,jdbcType=DECIMAL},
+      remainBorrowLimit = #{remainborrowlimit,jdbcType=DECIMAL},
+      borrowLimit = #{borrowlimit,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
