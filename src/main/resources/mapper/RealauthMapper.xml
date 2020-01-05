@@ -3,12 +3,36 @@
 <mapper namespace="com.zking.ssm.mapper.RealauthMapper">
 
     <insert id="addRealauth">
-
-
-
+        INSERT INTO realauth
+        (realname,sex,bornDate,idNumber,address,state,image1,image2,applyTime,applier_id) VALUES
+        (#{realname},#{sex},#{bornDate},#{idNumber},#{address},1,#{image1},#{image2},SYSDATE(),#{applier_id})
     </insert>
-    <update id="updateRealauth"></update>
-    <delete id="delRealauth"></delete>
-    <select id="selectRealauth" resultType="com.zking.ssm.model.Realauth"></select>
+
+
+    <update id="updateRealauth">
+
+
+
+    </update>
+
+
+    <delete id="delRealauth">
+        delete from realauth where id = #{id}
+    </delete>
+
+
+    <select id="selectRealauthByAppId" resultType="com.zking.ssm.model.Realauth">
+        select * from realauth where applier_id = #{applierId}
+    </select>
+
+
+    <select id="selectRealauths" resultType="com.zking.ssm.model.Realauth">
+        select * from realauth
+
+
+    </select>
+    <select id="selectRealauthByIdNumber" resultType="com.zking.ssm.model.Realauth">
+        select * from realauth where idNumber = #{idNumber}
+    </select>
 
 </mapper>

@@ -1,54 +1,51 @@
-package com.zking.ssm.mapper;
+package com.zking.ssm.service;
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.zking.ssm.model.Realauth;
+import com.zking.ssm.util.PageBean;
 
 import java.util.List;
 
-/**
- * 实名认证
- */
-public interface RealauthMapper {
+public interface IRealauthService {
 
     /**
      * 添加实名认证
      * @return
      */
-    int addRealauth(Realauth realauth);
+    void addRealauth(Realauth realauth);
 
     /**
      * 删除实名认证
      * @return
      */
-    int delRealauth(Realauth realauth);
+    void delRealauth(Realauth realauth);
 
     /**
-     * 修改实名认证(未做)
+     * 修改实名认证
      * @return
      */
-    int updateRealauth(Realauth realauth);
+    void updateRealauth(Realauth realauth);
 
 
     /**
-     * 根据用户id进行查询
+     * 查询实名认证
+     *      根据使用者的id
      * @param realauth
      * @return
      */
     List<Realauth> selectRealauthByAppId(Realauth realauth);
 
     /**
-     * 查询所有
+     * 查询全部
      * @param realauth
      * @return
      */
     List<Realauth> selectRealauths(Realauth realauth);
 
     /**
-     *  查询这个身份证是否在本平台认证过
-     * @param realauth
+     *  车上数据库里面是否有这个人了
      * @return
      */
     List<Realauth> selectRealauthByIdNumber(Realauth realauth);
 
-
+    List<Realauth> selectRealauthPage(Realauth realauth, PageBean pageBean);
 }
