@@ -19,31 +19,14 @@ import java.io.File;
 public class UploadController {
 
     @RequestMapping("/upload")
-    public Object fileupload(Logininfo logininfo, String filename,@RequestParam(value = "file",required = false) MultipartFile file) throws Exception {
+    public Object fileupload(Logininfo logininfo, String filename,@RequestParam(value = "file",required = false) MultipartFile file ,HttpServletRequest request) throws Exception {
 
         DataProtocol dataProtocol = new DataProtocol();
 
-        //获取到服务器根目录
-        String str = "" + this.getClass().getResource("/");
-        //进行截取
-        String substring = str.substring(6);
+        String targetPath = "/upload" + File.separator + file.getOriginalFilename();
+        String realPath = request.getServletContext().getRealPath(targetPath);
 
-        String taget = substring +  "upload" + File.separator + logininfo.getUsername();
-
-        taget = taget.replace('/','\\');
-
-        /**
-         * 调用工具类 判断服务器有没有这个用户的文件
-         */
-        FileUtil.ifFile(taget);
-
-        /**
-         * 上面只是创建一个文件夹
-         * 下面这次拼接才是把文件的全部路径弄好
-         */
-        taget +=  File.separator + file.getOriginalFilename();
-
-        File myfile = new File(taget);
+        File myfile = new File(realPath);
 
         String originalFilename = file.getOriginalFilename();
 
@@ -52,7 +35,7 @@ public class UploadController {
 
         dataProtocol.setCode(0);
 
-        dataProtocol.setData(taget);
+        dataProtocol.setData(realPath);
 
         return dataProtocol;
     }
