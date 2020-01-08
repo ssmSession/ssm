@@ -31,33 +31,21 @@ public class RealauthController {
     public Object testIdentity(Realauth realauth){
         DataProtocol dataProtocol = new DataProtocol();
         try {
-
-            boolean bs = true;
-
             List<Realauth> realauths = iRealauthService.selectRealauthByIdNumber(realauth);
             Realauth real = realauths.get(0);
 
-            if(real == null){
+            //判断数据库有没有数据
+            if(real != null){
                 dataProtocol.setCode(-1);
                 dataProtocol.setMessage("抱歉已经进行过认证了");
-                bs = false;
-            }
-
-            boolean b = true;
-
-            //为了节省资源
-            if(real == null){
-                 b = IdCodeUtil.testIdCode(realauth.getIdNumber(), realauth.getRealname());
-            }
-
-            if(!b){
-                dataProtocol.setCode(-1);
-                dataProtocol.setMessage("身份证认证失败");
-                bs = false;
-            }
-
-            if(bs){
-                dataProtocol.setMessage("认证成功");
+            }else {
+                boolean b = IdCodeUtil.testIdCode(realauth.getIdNumber(), realauth.getRealname());
+                if(b){
+                    dataProtocol.setMessage("认证成功");
+                }else {
+                    dataProtocol.setCode(-1);
+                    dataProtocol.setMessage("身份证认证失败");
+                }
             }
         }catch (Exception e){
             dataProtocol.setCode(-1);
