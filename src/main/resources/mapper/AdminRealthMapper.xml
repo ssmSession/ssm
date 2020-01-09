@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.admin.mapper.AdminRealthMapper">
+
+    <select id="getRealth" resultType="com.zking.ssm.model.Realauth">
+        select t1.id,t4.username appler, t1.realname,t1.sex,t1.remark,t1.idNumber,t1.address,t1.image1,t1.image2, t1.state,t2.title stateDesc,t3.username username
+        from realauth t1 inner join systemdictionaryitem t2 on t1.state=t2.id
+        inner join logininfo t3 on t1.auditor_id=t3.id
+        inner join logininfo t4 on t4.id=t1.applier_id where 1=1
+        <if test="state!=null">
+            and t1.state=#{state}
+        </if>
+        <if test="id!=null">
+            and t1.id=#{id}
+        </if>
+    </select>
+</mapper>

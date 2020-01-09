@@ -19,6 +19,36 @@ public class Realauth {
     private Long auditorId;
     private Long applierId;
 
+    private  String appler;
+
+    private String stateDesc;
+
+    private String username;
+
+    public String getAppler() {
+        return appler;
+    }
+
+    public void setAppler(String appler) {
+        this.appler = appler;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getStateDesc() {
+        return stateDesc;
+    }
+
+    public void setStateDesc(String stateDesc) {
+        this.stateDesc = stateDesc;
+    }
+
     public Long getId() {
         return id;
     }

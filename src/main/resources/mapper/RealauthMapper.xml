@@ -10,8 +10,7 @@
 
 
     <update id="updateRealauth">
-
-
+    update realauth set remark=#{remark}, auditor_id=#{auditorId},state=#{state} where id=#{id}
 
     </update>
 

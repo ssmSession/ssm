@@ -11,9 +11,15 @@ public class DataProtocol extends HashMap {
 
     private long ts = System.currentTimeMillis();
 
+
+
     public DataProtocol() {
         this.put("code", SUCCESS);
         this.put("ts", ts);
+    }
+
+    public void setTotal(Integer total){
+        this.put("total",total);
     }
 
 

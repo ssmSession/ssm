@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.admin.mapper.AdminSystemdictionaryMapper">
+
+    <select id="selectAllState" resultType="com.zking.ssm.model.Systemdictionary">
+    select * from systemdictionaryitem where parentId
+      =(select id from systemdictionary where title='审核状态')
+    </select>
+
+</mapper>

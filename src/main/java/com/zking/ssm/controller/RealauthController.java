@@ -45,6 +45,7 @@ public class RealauthController {
 
             boolean b = true;
 
+
             //为了节省资源
             if(real == null){
                  b = IdCodeUtil.testIdCode(realauth.getIdNumber(), realauth.getRealname());
@@ -97,6 +98,18 @@ public class RealauthController {
             dataProtocol.setCode(-1);
         }
         return dataProtocol;
+    }
+
+    @RequestMapping("/updateRealauth")
+    public Object updateRealauth(Realauth realauth){
+        DataProtocol data=new DataProtocol();
+       try{
+           iRealauthService.updateRealauth(realauth);
+           data.setCode(1);
+       }catch (Exception e){
+           data.setCode(DataProtocol.FAIL);
+       }
+       return data;
     }
 
     /**
