@@ -63,6 +63,9 @@ public class UploadController {
 
         DataProtocol dataProtocol = new DataProtocol();
 
+        String realPath = "d:/images/" + username;
+
+        FileUtil.ifFile(realPath);
 
         //获取到上传的文件数据
         String contentType = file.getContentType();
@@ -71,10 +74,9 @@ public class UploadController {
             System.out.println("===不属于图片类型...===");
             return null;
         }
-
         //动态获取上传文件夹的路径
-        ServletContext context = req.getServletContext();
-        String realPath = context.getRealPath("/upload");//获取本地存储位置的绝对路径
+//        ServletContext context = req.getServletContext();
+//        String realPath = context.getRealPath("/upload");//获取本地存储位置的绝对路径
 
         String filename = file.getOriginalFilename();//获取上传时的文件名称
         filename = UUID.randomUUID().toString()+"."+FilenameUtils.getExtension(filename);//创建一个新的文件名称    getExtension(name):获取文件后缀名
@@ -86,7 +88,9 @@ public class UploadController {
 
 
 
-        dataProtocol.setData("/upload/"+filename);
+        dataProtocol.setData(realPath +"/"+filename);
+
+
 
         return dataProtocol;
     }
@@ -96,7 +100,7 @@ public class UploadController {
      * @param response
      */
     @RequestMapping(value =  "/outLoadFile")
-    public void outloadFile(HttpServletResponse response, String path){
+    public void outloadFile(HttpServletResponse response, String path,String username){
         File file=new File(path);
         ServletOutputStream out=null;
         try {
