@@ -18,7 +18,6 @@
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
 
-
     <!--3. dbcp2数据库连接池配置-->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
           destroy-method="close">
