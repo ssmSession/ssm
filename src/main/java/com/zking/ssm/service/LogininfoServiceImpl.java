@@ -16,7 +16,8 @@ public class LogininfoServiceImpl implements ILogininfoService {
     private LogininfoMapper logininfoMapper;
 
     @Override
-    public Logininfo getUserByNameAndPwd(Logininfo logininfo){
+    public Logininfo getUserByNameAndPwd(Logininfo logininfo)
+    {
         return logininfoMapper.getUserByNameAndPwd(logininfo);
     }
 
