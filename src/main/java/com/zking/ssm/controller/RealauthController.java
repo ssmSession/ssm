@@ -88,6 +88,11 @@ public class RealauthController {
         return dataProtocol;
     }
 
+    /**
+     * 审核实名认证
+     * @param realauth
+     * @return
+     */
     @RequestMapping("/updateRealauth")
     public Object updateRealauth(Realauth realauth){
         DataProtocol data=new DataProtocol();

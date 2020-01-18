@@ -8,7 +8,23 @@
 
 
     <update id="updateLoginInfoState">
-        UPDATE logininfo SET state = #{state} WHERE id = #{id}
+        UPDATE logininfo SET
+        <if test="state!=null">
+            state = #{state},
+        </if>
+        <if test="username!=null and username!='' ">
+             username=#{username},
+        </if>
+        <if test="password!=null and password!='' ">
+            password=#{password},
+        </if>
+        <if test="phoneNumber!=null and phoneNumber!='' ">
+            phoneNumber=#{phoneNumber},
+        </if>
+        <if test="userType!=null and userType!='' ">
+            userType=#{userType},
+        </if>
+        id=id WHERE id = #{id}
     </update>
 
 
@@ -24,6 +40,10 @@
 
     <select id="getLoginInfosByUserType" resultType="com.zking.ssm.model.Logininfo">
         select  * from logininfo where userType = #{userType}
+    </select>
+
+    <select id="getLogininfo" resultType="com.zking.ssm.model.Logininfo">
+        select  * from logininfo where id = #{id}
     </select>
 
 </mapper>

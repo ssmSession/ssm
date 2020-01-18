@@ -2,9 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zking.ssm.admin.mapper.AdminSystemdictionaryMapper">
 
+    <update id="updateSystemdictionary">
+        update systemdictionary set
+        <if test="sn!=null">
+            sn=#{sn},
+        </if>
+        <if test="title!=null">
+            title=#{title},
+        </if>
+        <if test="intro!=null">
+            intro=#{intro},
+        </if>
+        id=id  where id=#{id}
+    </update>
+
+    <delete id="delSystemdictionary">
+        delete from systemdictionary where id=#{id}
+    </delete>
+
     <select id="selectAllState" resultType="com.zking.ssm.model.Systemdictionary">
     select * from systemdictionaryitem where parentId
       =(select id from systemdictionary where title='审核状态')
+    </select>
+
+    <select id="getSystemdictionary" resultType="com.zking.ssm.model.Systemdictionary">
+        select * from systemdictionary
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+        </where>
     </select>
 
 </mapper>

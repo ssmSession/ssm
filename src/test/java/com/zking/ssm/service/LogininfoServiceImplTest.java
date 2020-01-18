@@ -36,7 +36,7 @@ public class LogininfoServiceImplTest extends BaseTest {
     @Test
     public void getUserType(){
 
-        List<Logininfo> loginInfoByUserType = logininfoService.getLoginInfoByUserType(1);
+        List<Logininfo> loginInfoByUserType = logininfoService.getLoginInfoByUserTypePage(1,null);
 
         loginInfoByUserType.forEach(x-> System.out.println(x));
 

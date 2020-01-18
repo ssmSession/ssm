@@ -8,6 +8,7 @@ import com.zking.ssm.service.IIplogService;
 import com.zking.ssm.service.ILogininfoService;
 import com.zking.ssm.util.DataProtocol;
 import com.zking.ssm.util.MD5Util;
+import com.zking.ssm.util.PageBean;
 import com.zking.ssm.util.SmsSnedUtil;
 import jdk.nashorn.internal.parser.DateParser;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -113,10 +115,16 @@ public class LogininfoController {
      * @return
      */
     @RequestMapping("/getLoginByUserType")
-    public Object getLoginInfoByUserType(Integer userType) {
+    public Object getLoginInfoByUserType(Integer userType, HttpServletRequest request) {
         DataProtocol dataProtocol = new DataProtocol();
 
-        List<Logininfo> loginInfoByUserType = logininfoService.getLoginInfoByUserType(userType);
+        PageBean pageBean=new PageBean();
+
+        pageBean.setRequest(request);
+
+        List<Logininfo> loginInfoByUserType = logininfoService.getLoginInfoByUserTypePage(userType,pageBean);
+
+        dataProtocol.setTotal(pageBean.getTotal());
 
         dataProtocol.setData(loginInfoByUserType);
 
@@ -132,9 +140,15 @@ public class LogininfoController {
     public Object updateLoginInfoState(Logininfo logininfo) {
 
         DataProtocol dataProtocol = new DataProtocol();
+
+        String strPwd = MD5Util.getMd5(logininfo.getPassword());
+
+        logininfo.setPassword(strPwd);
         try {
             logininfoService.updateLoginInfoState(logininfo);
+            dataProtocol.setCode(1);
         } catch (Exception e) {
+            System.out.println(e);
             dataProtocol.setCode(-1);
         }
         return dataProtocol;
@@ -157,6 +171,21 @@ public class LogininfoController {
         }
 
         return dataProtocol;
+    }
+
+
+    @RequestMapping("/loadLogininfo")
+    public Object loadLogininfo(Logininfo logininfo){
+        DataProtocol data=new DataProtocol();
+        try {
+            Logininfo logins = logininfoService.getLogininfo(logininfo);
+            data.setData(logins);
+            data.setCode(DataProtocol.SUCCESS);
+        } catch (Exception e) {
+            data.setCode(-1);
+        }
+        return data;
+
     }
 
 

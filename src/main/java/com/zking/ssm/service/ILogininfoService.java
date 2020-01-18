@@ -1,6 +1,7 @@
 package com.zking.ssm.service;
 
 import com.zking.ssm.model.Logininfo;
+import com.zking.ssm.util.PageBean;
 
 import java.util.List;
 
@@ -10,9 +11,11 @@ public interface ILogininfoService {
 
     int userRegister(Logininfo logininfo);
 
-    List<Logininfo> getLoginInfoByUserType(Integer userType);
+    List<Logininfo> getLoginInfoByUserTypePage(Integer userType, PageBean pageBean);
 
     void updateLoginInfoState(Logininfo logininfo);
 
     void updateLoginInfoUserType(Logininfo logininfo);
+
+    Logininfo getLogininfo(Logininfo logininfo);
 }

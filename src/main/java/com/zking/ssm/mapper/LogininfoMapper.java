@@ -44,7 +44,12 @@ public interface LogininfoMapper {
      */
     public int updateLoginInfoUserType (Logininfo logininfo);
 
-
+    /**
+     * 根据用户Id进行查询
+     * @param logininfo
+     * @return
+     */
+    Logininfo getLogininfo(Logininfo logininfo);
 
 
 

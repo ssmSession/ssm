@@ -58,7 +58,7 @@ public class IdCodeUtil {
     }
 
     public static void main (String[] agrs){
-        System.out.println(testIdCode("431025200002195636","资廷辉"));
+        System.out.println(testIdCode("431122200101166159","文俊逸"));
     }
 
 }
