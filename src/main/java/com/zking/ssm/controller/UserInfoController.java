@@ -34,9 +34,6 @@ public class UserInfoController {
         }catch (Exception e){
             dataProtocol.setCode(-1);
         }
-
-
-
         return dataProtocol;
     }
 

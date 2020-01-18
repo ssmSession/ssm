@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.BidrequestMapper">
+    <!--提交申请-->
+    <insert id="submitApplication" parameterType="com.zking.ssm.model.Bidrequest">
+        INSERT INTO bidrequest(version,returnType,bidRequestType,bidRequestState,
+              bidRequestAmount,currentRate,monthes2Return,bidCount,totalRewardAmount,
+              currentSum,title,description,createuser_id,disableDays,minBidAmount)
+            VALUES (#{version},#{returnType},#{bidRequestType},#{bidRequestState}
+              #{bidRequestAmount},#{currentRate},#{monthes2Return},#{bidCount},#{totalRewardAmount}
+              #{currentSum},#{title},#{description},#{createuserId},#{disableDays},#{minBidAmount})
+    </insert>
+
+    <!--根据用户id查询状态是否为已完成实名认证-->
+    <select id="getUserInfoByState" resultType="com.amazonaws.services.codecommit.model.UserInfo">
+        SELECT  * FROM  userinfo u WHERE
+        logininfo_id = #{logininfoId}
+        and bitState = 2
+    </select>
+
+    <!--查询月份-->
+    <select id="getMonths" resultType="com.zking.ssm.model.Systemdictionaryitem">
+        SELECT * FROM systemdictionaryitem WHERE parentId =
+        (
+	      SELECT id FROM systemdictionary WHERE title = '月份'
+        )
+    </select>
+
+    <!--招标天数-->
+    <select id="getDays" resultType="com.zking.ssm.model.Systemdictionaryitem">
+          SELECT * FROM systemdictionaryitem WHERE parentId =
+        (
+	      SELECT id FROM systemdictionary WHERE title = '招标天数'
+        )
+    </select>
+</mapper>

@@ -33,6 +33,7 @@ public class AccountController {
             Account acc = iAccountService.selectAccountById(account);
             dataProtocol.setData(acc);
         }catch (Exception e){
+            e.printStackTrace();
             dataProtocol.setCode(-1);
         }
         return  dataProtocol;
